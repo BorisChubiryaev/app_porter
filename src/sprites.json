@@ -1,0 +1,18 @@
+{
+  "palette": {"k": "#15104a", "r": "#ff4d6d", "R": "#c92a4b", "w": "#ffffff", "y": "#ffd23f", "Y": "#e09a00", "m": "#2ee6a6", "M": "#11a67a", "b": "#3a2be8", "s": "#aab4e6"},
+  "sprites": {
+    "hero_a": ["..kkkkkkkk..", ".krrrrrrrrk.", ".krrrrrrrrk.", ".krwwwwwwrk.", ".krwkwwkwrk.", ".krwkwwkwrk.", ".krwwwwwwrk.", ".krwwkkwwrk.", ".krwwwwwwrk.", ".krrrrrrrrk.", ".krRRRRRRrk.", "..kkkkkkkk..", "..kk....kk..", "........kk.."],
+    "hero_b": ["..kkkkkkkk..", ".krrrrrrrrk.", ".krrrrrrrrk.", ".krwwwwwwrk.", ".krwkwwkwrk.", ".krwkwwkwrk.", ".krwwwwwwrk.", ".krwwkkwwrk.", ".krwwwwwwrk.", ".krrrrrrrrk.", ".krRRRRRRrk.", "..kkkkkkkk..", "..kk....kk..", "..kk........"],
+    "hero_j": ["..kkkkkkkk..", ".krrrrrrrrk.", ".krrrrrrrrk.", ".krwwwwwwrk.", ".krwkwwkwrk.", ".krwkwwkwrk.", ".krwwwwwwrk.", ".krwkkkkwrk.", ".krwwwwwwrk.", ".krrrrrrrrk.", ".krRRRRRRrk.", "..kkkkkkkk..", ".kk......kk.", "............"],
+    "bug": ["..k....k..", "...k..k...", "..mmmmmm..", ".mmwkmwkm.", "kmmmmmmmmk", ".mMmmmmMm.", "k.mMMMMm.k", ".k.k..k.k."],
+    "coin": ["..kkkkkk..", ".kyyyyyyk.", "kyywwyyYYk", "kywyyyyyYk", "kywyyyyyYk", "kyyyyyyyYk", "kyyyyyyyYk", "kyyyyyYYYk", ".kYYYYYYk.", "..kkkkkk.."],
+    "mac": ["............", ".kkkkkkkkkk.", ".kbbbbbbbbk.", ".kbbbbbbbbk.", ".kbbmbbbbbk.", ".kbbbbbbbbk.", ".kbbbbbbbbk.", ".kkkkkkkkkk.", "kssssssssssk", "kssskkkksssk", "kkkkkkkkkkkk", "............"],
+    "phone": ["...kkkkkk...", "..kssssssk..", "..kbbbbbbk..", "..kbbbbbbk..", "..kbbmmbbk..", "..kbbmmbbk..", "..kbbbbbbk..", "..kbbbbbbk..", "..kbbbbbbk..", "..kbbbbbbk..", "..kssssssk..", "...kkkkkk..."],
+    "key": ["............", "..kkkk......", ".kyyyyk.....", "kyykkyyk....", "kyykkyykkkkk", "kyyyyyyyyyyk", "kYYYYYYYYYYk", ".kYYYYkkYkYk", "..kkkk..k.k.", "............", "............", "............"],
+    "disk": ["kkkkkkkkkkk.", "kbbwwwwwwbbk", "kbbwwwwkwbbk", "kbbwwwwkwbbk", "kbbwwwwwwbbk", "kbbbbbbbbbbk", "kbbbbbbbbbbk", "kbwwwwwwwwbk", "kbwkkkkkkwbk", "kbwwwwwwwwbk", "kbwkkkkkkwbk", "kkkkkkkkkkkk"],
+    "idcard": ["............", "kkkkkkkkkkkk", "kwwwwwwwwwwk", "kwmmmwwkkkwk", "kwmkmwwwwwwk", "kwmmmwwkkkwk", "kwmmmwwwwwwk", "kwwwwwwkkkwk", "kwwwwwwwwwwk", "kkkkkkkkkkkk", "............", "............"],
+    "trash": ["....kkkk....", "kkkkkkkkkkkk", "krrrrrrrrrrk", "kkkkkkkkkkkk", ".kssskskssk.", ".kssskskssk.", ".kssskskssk.", ".kssskskssk.", ".kssskskssk.", ".kssskskssk.", ".kssssssssk.", "..kkkkkkkk.."],
+    "bubble": [".kkkkkkkkkk.", "kwwwwwwwwwwk", "kwkkkwwkkkwk", "kwwwwwwwwwwk", "kwkkkkwkkwwk", "kwwwwwwwwwwk", ".kkkkkkkkkk.", "...kwwk.....", "...kwk......", "...kk.......", "............", "............"],
+    "star": [".....kk.....", "....kyyk....", "....kyyk....", "kkkkyyyykkkk", "kyyyyyyyyyyk", ".kyyyyyyyyk.", "..kyyyyyyk..", "..kyyyyyyk..", ".kyyykkyyyk.", ".kykk..kkyk.", ".kk......kk.", "............"]
+  }
+}

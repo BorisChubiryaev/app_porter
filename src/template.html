@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="theme-color" content="#3a2be8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:locale" content="{{lang}}">
+{{alternates}}
+<link rel="icon" href="{{root}}icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="{{font_link}}">
+<link rel="stylesheet" href="{{root}}style.css">
+</head>
+<body>
+<a class="skip" href="#main">{{skip}}</a>
+
+<header class="hud">
+  <a class="brand" href="./">{{spr_hero_a}}<span>{{app_name}}</span></a>
+  <p class="free"><span class="blink" aria-hidden="true">●</span> {{hud_free}}</p>
+  <nav aria-label="{{nav_label}}">
+    <a href="#how">{{nav_how}}</a>
+    <a href="#need">{{nav_need}}</a>
+    <a href="#faq">{{nav_faq}}</a>
+    <a href="#support">{{nav_support}}</a>
+  </nav>
+  <p class="credit">{{hud_coins}} <b id="credit">00</b></p>
+  <details class="lang">
+    <summary aria-label="{{lang_label}}">{{lang_name}}</summary>
+    <ul>{{language_links}}</ul>
+  </details>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-copy">
+      <p class="tag">{{hero_eyebrow}}</p>
+      <h1>{{hero_title}}</h1>
+      <div class="hero-row">
+        <p class="lede">{{hero_sub}}</p>
+        <div>
+          <div class="actions">
+            {{download_button}}
+            <a class="button quiet" href="{{source_url}}" rel="noopener">{{cta_source}}</a>
+          </div>
+          <p class="note">{{hero_note}}</p>
+        </div>
+      </div>
+    </div>
+    <div id="game" class="game" role="button" tabindex="0" aria-label="{{game_label}}" data-demo="{{game_demo}}" data-go="{{game_go}}" data-over="{{game_over}}">
+      <canvas width="320" height="65"></canvas>
+      <div class="game-hud" aria-hidden="true">
+        <span id="game-msg">{{game_demo}}</span>
+        <span>{{game_score}} <b id="game-score">000</b> · {{game_best}} <b id="game-best">000</b></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="{{facts_label}}">
+    <div class="ticker-run">
+      <p>{{tick1}} {{spr_star}} {{tick2}} {{spr_star}} {{tick3}} {{spr_star}} {{tick4}} {{spr_star}}</p>
+      <p aria-hidden="true">{{tick1}} {{spr_star}} {{tick2}} {{spr_star}} {{tick3}} {{spr_star}} {{tick4}} {{spr_star}}</p>
+      <p aria-hidden="true">{{tick1}} {{spr_star}} {{tick2}} {{spr_star}} {{tick3}} {{spr_star}} {{tick4}} {{spr_star}}</p>
+      <p aria-hidden="true">{{tick1}} {{spr_star}} {{tick2}} {{spr_star}} {{tick3}} {{spr_star}} {{tick4}} {{spr_star}}</p>
+    </div>
+  </div>
+
+  <section class="band ink">
+    <div class="wrap">
+      <ol class="scores">
+        <li><strong>{{fact1_big}}</strong><i></i><span>{{fact1}}</span></li>
+        <li><strong>{{fact2_big}}</strong><i></i><span>{{fact2}}</span></li>
+        <li><strong>{{fact3_big}}</strong><i></i><span>{{fact3}}</span></li>
+      </ol>
+
+      <h2 class="vs-title">{{vs_title}}</h2>
+      <div class="vs">
+        <article class="lane">
+          <h3>{{vs_emu}}</h3>
+          <div class="chain">
+            <span class="node">{{vs_game}}</span><span class="link" aria-hidden="true"></span>
+            <span class="node mid">{{vs_emu_mid}}</span><span class="link" aria-hidden="true"></span>
+            <span class="node">{{vs_chip}}</span>
+          </div>
+          <p>{{vs_emu_note}}</p>
+        </article>
+        <div class="vs-mark" aria-hidden="true">VS</div>
+        <article class="lane win">
+          <h3>{{vs_nat}}</h3>
+          <div class="chain">
+            <span class="node">{{vs_game}}</span><span class="link long" aria-hidden="true">{{spr_hero_j}}</span>
+            <span class="node">{{vs_chip}}</span>
+          </div>
+          <p>{{vs_nat_note}}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="check ink-yolk" aria-hidden="true"></div>
+
+  <section id="how" class="band yolk">
+    <div class="wrap">
+      <h2>{{how_title}}</h2>
+      <div class="map">
+        <div class="rail" aria-hidden="true"><div class="walker">{{spr_hero_a}}{{spr_hero_b}}</div></div>
+        <ol class="stages">
+          <li><p class="stage">{{stage}} 1</p><h3>{{how1_t}}</h3><p>{{how1}}</p><p class="badge">{{how1_b}}</p></li>
+          <li><p class="stage">{{stage}} 2</p><h3>{{how2_t}}</h3><p>{{how2}}</p><p class="badge">{{how2_b}}</p></li>
+          <li><p class="stage">{{stage}} 3</p><h3>{{how3_t}}</h3><p>{{how3}}</p><p class="badge">{{how3_b}}</p></li>
+        </ol>
+      </div>
+
+      <h3 class="shots-title">{{shot_title}}</h3>
+      <div class="shots">
+        <figure><img src="{{root}}shots/{{shot_lang}}_ready.png" width="1840" height="1304" alt="{{shot_ready_alt}}" loading="lazy"><figcaption>{{shot_ready}}</figcaption></figure>
+        <figure><img src="{{root}}shots/{{shot_lang}}_build.png" width="1840" height="1304" alt="{{shot_build_alt}}" loading="lazy"><figcaption>{{shot_build}}</figcaption></figure>
+      </div>
+      <p class="shots-note">{{shot_note}}</p>
+    </div>
+  </section>
+
+  <div class="check yolk-mint" aria-hidden="true"></div>
+
+  <section id="need" class="band mint">
+    <div class="wrap">
+      <h2>{{need_title}}</h2>
+      <p class="lede">{{need_sub}}</p>
+      <fieldset class="picker">
+        <legend>{{pick_label}}</legend>
+        <input type="radio" name="player" id="p-iphone" checked>
+        <label for="p-iphone">{{spr_phone}}<span>iPhone</span></label>
+        <input type="radio" name="player" id="p-mac">
+        <label for="p-mac">{{spr_mac}}<span>Mac</span></label>
+        <div class="slots">
+          <article class="slot">{{spr_mac}}<div><h3>{{need1_t}}</h3><p>{{need1}}</p></div></article>
+          <article class="slot">{{spr_key}}<div><h3>{{need2_t}}</h3><p>{{need2}}</p></div></article>
+          <article class="slot">{{spr_disk}}<div><h3>{{need3_t}}</h3><p>{{need3}}</p></div></article>
+          <article class="slot wide only-iphone">{{spr_phone}}<div><h3>{{need4_t}}</h3><p>{{need4}}</p></div></article>
+          <article class="slot wide only-iphone">{{spr_idcard}}<div><h3>{{need5_t}}</h3><p>{{need5}}</p></div></article>
+          <article class="slot full only-mac">{{spr_star}}<div><h3>{{need_mac_t}}</h3><p>{{need_mac}}</p></div></article>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+
+  <section class="band paper">
+    <div class="wrap">
+      <h2>{{feat_title}}</h2>
+      <div class="controls">
+        <div class="controls-copy">
+          <h3>{{feat2_t}}</h3>
+          <p>{{feat2}}</p>
+          <p class="hint">{{demo_hint}}</p>
+          <div class="sliders">
+            <label for="ctl-size">{{demo_size}}</label><input type="range" id="ctl-size" min="60" max="140" value="100">
+            <label for="ctl-opacity">{{demo_opacity}}</label><input type="range" id="ctl-opacity" min="20" max="100" value="100">
+          </div>
+          <div class="toggles">
+            <label class="check-label"><input type="checkbox" id="ctl-hide"> {{demo_hide}}</label>
+            <button type="button" class="mini" id="ctl-reset">{{demo_reset}}</button>
+          </div>
+        </div>
+        <div class="phone" id="phone" role="group" aria-label="{{phone_label}}">
+          <div class="screen">
+            <div class="scene" aria-hidden="true">{{spr_hero_a}}{{spr_bug}}{{spr_coin}}</div>
+            <button type="button" class="pad" data-x="4" data-y="44" aria-label="D-pad"><i></i><i></i></button>
+            <button type="button" class="abxy" data-x="77" data-y="40" aria-label="A B X Y"><b>X</b><b>Y</b><b>A</b><b>B</b></button>
+            <button type="button" class="pill" data-x="4" data-y="9">L</button>
+            <button type="button" class="pill" data-x="85" data-y="9">R</button>
+            <button type="button" class="pill small" data-x="39" data-y="9">−</button>
+            <button type="button" class="pill small" data-x="53" data-y="9">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="items">
+        <article>{{spr_star}}<div><h3>{{feat1_t}}</h3><p>{{feat1}}</p></div></article>
+        <article>{{spr_trash}}<div><h3>{{feat3_t}}</h3><p>{{feat3}}</p></div></article>
+        <article>{{spr_bubble}}<div><h3>{{feat4_t}}</h3><p>{{feat4}}</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band ink">
+    <div class="wrap faq">
+      <h2>{{faq_title}}</h2>
+      <div class="dialogue">
+        <details><summary>{{q1}}</summary><p>{{a1}}</p></details>
+        <details><summary>{{q2}}</summary><p>{{a2}}</p></details>
+        <details><summary>{{q3}}</summary><p>{{a3}}</p></details>
+        <details><summary>{{q4}}</summary><p>{{a4}}</p></details>
+        <details><summary>{{q5}}</summary><p>{{a5}}</p></details>
+        <details><summary>{{q6}}</summary><p>{{a6}} <a href="{{games_url}}" rel="noopener">{{a6_link}}</a></p></details>
+        <details><summary>{{q7}}</summary><p>{{a7}}</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="support" class="band coral">
+    <div class="wrap support">
+      <div>
+        <p class="tag ink-tag">{{coin_tag}}</p>
+        <h2>{{support_title}}</h2>
+        <p class="lede">{{support_sub}}</p>
+        <div class="actions">{{donate_buttons}}</div>
+      </div>
+      <div class="machine">
+        <button type="button" id="coin" class="coin" aria-label="{{coin_btn}}">{{spr_coin}}</button>
+        <div class="slot-mouth" aria-hidden="true"><i></i></div>
+        <p>{{coin_hint}}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band sky continue">
+    <div class="wrap">
+      <h2>{{continue_title}}</h2>
+      <div class="actions">{{download_button}}</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>{{legal}}</p>
+    <p>{{credits}} <a href="{{upstream_url}}" rel="noopener">nxnative</a> · <a href="{{source_url}}" rel="noopener">{{cta_source}}</a></p>
+  </div>
+</footer>
+<script>window.NX_SPRITES = {{sprites_json}};</script>
+<script src="{{root}}site.js" defer></script>
+</body>
+</html>
