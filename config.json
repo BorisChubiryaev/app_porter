@@ -4,7 +4,12 @@
   "source_url": "https://github.com/BorisChubiryaev/nxnative",
   "upstream_url": "https://github.com/seedds/nxnative",
   "games_url": "https://github.com/BorisChubiryaev/nxnative/blob/main/dm/games/README.md#games",
-  "donate": [],
+  "donate": [
+    {
+      "label": "Boosty",
+      "url": "https://boosty.to/oldnewborispro"
+    }
+  ],
   "verify": {
     "google": "1o37_iIkSWjKV5hyD7mSPuv17pgphhXs4GRnILU3IFk",
     "yandex": "b37ec410603d53c1",
