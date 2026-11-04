@@ -4,5 +4,10 @@
   "source_url": "https://github.com/BorisChubiryaev/nxnative",
   "upstream_url": "https://github.com/seedds/nxnative",
   "games_url": "https://github.com/BorisChubiryaev/nxnative/blob/main/dm/games/README.md#games",
-  "donate": []
+  "donate": [],
+  "verify": {
+    "google": "",
+    "yandex": "",
+    "bing": ""
+  }
 }

@@ -20,13 +20,14 @@ Everything is in `config.json`; run the build after changing it.
 |---|---|
 | `base_url` | The site's address, for search engines (language links, sitemap). Empty until there is a domain. |
 | `download_url` | The app's zip. While empty, the button says the download is coming. |
+| `verify` | The codes from Google Search Console, Yandex Webmaster and Bing Webmaster Tools (`google`, `yandex`, `bing`): the code alone, not the whole tag. Each adds its tag to every page. |
 | `donate` | A list of `{"label": "Ko-fi", "url": "https://..."}`, one button each. While empty, the section says they are coming. |
 
 `dist/` can be served by any static host; `.github/workflows/pages.yml` publishes it to GitHub Pages on a push to `main` (turn Pages on in the repository's settings, with GitHub Actions as the source).
 
 ## Changing the text
 
-Texts are in `src/i18n/<language>.json`, the page is `src/template.html`, its look `src/style.css`, its toys (the level in the hero, the practice screen, the coin) `src/site.js`, and all pixel art, also the favicon, `src/sprites.json`. A new language takes a JSON file and an entry in `LANGS` in `build.py`.
+Texts are in `src/i18n/<language>.json`, the page is `src/template.html`, its look `src/style.css`, its toys (the level in the hero, the practice screen, the coin) `src/site.js`, and all pixel art, also the favicon, `src/sprites.json`. `build.py` draws the picture for shared links, `og.png`. A new language takes a JSON file and an entry in `LANGS` in `build.py`.
 
 ## Rules for the text
 
