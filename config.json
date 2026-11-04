@@ -1,6 +1,6 @@
 {
-  "base_url": "",
-  "download_url": "",
+  "base_url": "https://borischubiryaev.github.io/app_porter",
+  "download_url": "https://github.com/BorisChubiryaev/nxnative/releases/latest/download/Slotless.zip",
   "source_url": "https://github.com/BorisChubiryaev/nxnative",
   "upstream_url": "https://github.com/seedds/nxnative",
   "games_url": "https://github.com/BorisChubiryaev/nxnative/blob/main/dm/games/README.md#games",
