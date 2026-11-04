@@ -21,9 +21,10 @@ Everything is in `config.json`; run the build after changing it.
 | `base_url` | The site's address, for search engines (language links, sitemap). Empty until there is a domain. |
 | `download_url` | The app's zip. While empty, the button says the download is coming. |
 | `verify` | The codes from Google Search Console, Yandex Webmaster and Bing Webmaster Tools (`google`, `yandex`, `bing`): the code alone, not the whole tag. Each adds its tag to every page. |
+| `indexnow_key` | Public by design: `build.py` puts it in a file on the site, which proves to IndexNow that the list of pages comes from the site's owner. |
 | `donate` | A list of `{"label": "Ko-fi", "url": "https://..."}`, one button each. While empty, the section says they are coming. |
 
-`dist/` can be served by any static host; `.github/workflows/pages.yml` publishes it to GitHub Pages on a push to `main` (turn Pages on in the repository's settings, with GitHub Actions as the source).
+The site lives on Cloudflare Pages at https://slotless.pages.dev: a push to `main` builds and publishes it (build command `python3 build.py`, output directory `dist`). After a deploy that changes pages, `python3 indexnow.py` tells Bing and Yandex.
 
 ## Changing the text
 

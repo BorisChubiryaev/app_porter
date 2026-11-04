@@ -8,12 +8,14 @@ Only config.json needs editing to go live:
   download_url  the zip of the app; while empty the button says the download is coming
   donate        a list of {"label": "Ko-fi", "url": "https://..."}; while empty the section says so
   verify        the codes that search engines' webmaster tools give (google, yandex, bing); an empty one adds nothing
+  indexnow_key  public by design: the file that lets indexnow.py tell Bing and Yandex about the pages
 """
 import html
 import json
 import re
 import shutil
 import struct
+import subprocess
 import sys
 import zlib
 from pathlib import Path
@@ -89,6 +91,7 @@ def seo_tags(lang, config, t, page_url, base):
     """The parts of the head that need the site's address, or the webmaster tools' codes."""
     e = lambda s: html.escape(s, quote=True)
     tags = [f'<meta name="{VERIFY_TAGS[k]}" content="{e(v)}">' for k, v in config.get('verify', {}).items() if v and k in VERIFY_TAGS]
+    tags.append('<meta name="robots" content="index,follow,max-image-preview:large">')
     tags += [f'<meta property="og:site_name" content="{e(t["app_name"])}">', '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{e(t["title"])}">', f'<meta name="twitter:description" content="{e(t["description"])}">']
     tags += [f'<meta property="og:locale:alternate" content="{OG_LOCALES[l]}">' for l in LANGS if l != lang]
     if not base:
@@ -99,7 +102,10 @@ def seo_tags(lang, config, t, page_url, base):
            'operatingSystem': 'macOS 26.6 or later', 'applicationCategory': 'UtilitiesApplication', 'isAccessibleForFree': True, 'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'}}
     if config['download_url']:
         app['downloadUrl'] = config['download_url']
-    tags.append('<script type="application/ld+json">' + json.dumps(app, ensure_ascii=False).replace('<', '\\u003c') + '</script>')
+    faq = {'@context': 'https://schema.org', '@type': 'FAQPage', 'inLanguage': lang, 'mainEntity': [{'@type': 'Question', 'name': t[f'q{i}'], 'acceptedAnswer': {'@type': 'Answer', 'text': t[f'a{i}']}} for i in range(1, 8)]}
+    site = {'@context': 'https://schema.org', '@type': 'WebSite', 'name': t['app_name'], 'url': f'{base}/', 'inLanguage': LANGS}
+    for block in (app, faq, site):
+        tags.append('<script type="application/ld+json">' + json.dumps(block, ensure_ascii=False).replace('<', '\\u003c') + '</script>')
     return '\n'.join(tags)
 
 
@@ -176,6 +182,35 @@ REDIRECT = '''<script>(function () {
 '''
 
 
+def write_for_crawlers(config, texts):
+    base = config['base_url'].rstrip('/')
+    url = lambda l: f'{base}/' if l == LANGS[0] else f'{base}/{l}/'
+    links = ''.join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{url(l)}"/>' for l in LANGS) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{base}/"/>'
+    day = subprocess.run(['git', 'log', '-1', '--format=%cI'], cwd=ROOT, capture_output=True, text=True).stdout.strip()[:10]   # the last commit's day, the site's real last change
+    lastmod = f'<lastmod>{day}</lastmod>' if day else ''
+    entries = ''.join(f'<url><loc>{url(l)}</loc>{lastmod}{links}</url>' for l in LANGS)
+    (DIST / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">{entries}</urlset>\n', 'utf-8')
+    (DIST / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {base}/sitemap.xml\n', 'utf-8')
+    if config.get('indexnow_key'):   # the key is public by design: this file proves the site's owner sent the list of pages
+        (DIST / f"{config['indexnow_key']}.txt").write_text(config['indexnow_key'], 'utf-8')
+    t = texts['en']
+    (DIST / 'llms.txt').write_text(f"""# {t['app_name']}
+
+> {t['description']}
+
+{t['hero_sub']}
+
+## Pages
+""" + ''.join(f"- [{texts[l]['lang_name']}]({url(l)})\n" for l in LANGS) + f"""
+## Links
+- [Download]({config['download_url']})
+- [Source code]({config['source_url']})
+- [Tested games]({config['games_url']})
+
+No games or keys are included. Use it only with games and keys you own. Not affiliated with Nintendo or Apple.
+""", 'utf-8')
+
+
 def main():
     config, texts = load()
     template = (SRC / 'template.html').read_text('utf-8')
@@ -185,7 +220,7 @@ def main():
         return 1
     shutil.rmtree(DIST, ignore_errors=True)
     DIST.mkdir()
-    for f in ('style.css', 'site.js'):
+    for f in ('style.css', 'site.js', '_headers', '404.html'):
         shutil.copy2(SRC / f, DIST / f)
     shutil.copytree(SRC / 'shots', DIST / 'shots')
     sprites = json.loads((SRC / 'sprites.json').read_text('utf-8'))
@@ -199,11 +234,7 @@ def main():
             text = text.replace('</head>', REDIRECT % json.dumps(LANGS) + '</head>', 1)
         (out / 'index.html').write_text(text, 'utf-8')
     if config['base_url']:
-        base = config['base_url'].rstrip('/')
-        urls = ''.join(f'<url><loc>{base}/{"" if l == LANGS[0] else l + "/"}</loc></url>' for l in LANGS)
-        (DIST / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n', 'utf-8')
-        (DIST / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {base}/sitemap.xml\n', 'utf-8')
-    (DIST / '.nojekyll').write_text('')
+        write_for_crawlers(config, texts)
     print(f'{len(LANGS)} languages in {DIST}')
     return 0
 
