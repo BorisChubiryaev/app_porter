@@ -1,4 +1,4 @@
-# NXNative Builder: landing page
+# Slotless: landing page
 
 A static site with no dependencies: one page per language, in `dist/`.
 
