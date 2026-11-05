@@ -4,20 +4,16 @@
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   function load(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
   function save(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
-  function pad(n, width) { return String(n).padStart(width, '0'); }
 
   document.querySelectorAll('.lang a').forEach(function (a) {
     a.addEventListener('click', function () { save('lang', a.getAttribute('hreflang')); });
   });
 
-  // ---- the level in the hero: a cartridge runs, jumps over bugs and picks up coins
-  var box = document.getElementById('game');
+  // ---- the scene under the hero: a cartridge runs and jumps over bugs by itself; it takes no input
+  var box = document.getElementById('scene');
   var canvas = box.querySelector('canvas');
   var ctx = canvas.getContext('2d');
-  var msg = document.getElementById('game-msg');
-  var scoreEl = document.getElementById('game-score');
-  var bestEl = document.getElementById('game-best');
-  var SCALE = 4, HEIGHT = 65, GROUND = 52, GRAVITY = 620, JUMP = -205;
+  var SCALE = 4, HEIGHT = 65, GROUND = 52, GRAVITY = 620, JUMP = -205, SPEED = 80;
 
   var art = {};
   Object.keys(NX_SPRITES.sprites).forEach(function (name) {
@@ -39,11 +35,8 @@
   var SKYLINE = [[0, 22, 16], [34, 14, 26], [60, 30, 12], [104, 18, 22], [136, 12, 32], [160, 34, 18], [210, 16, 14], [240, 24, 28], [280, 20, 16]];
   var PERIOD = 320;
 
-  var mode = 'demo', width = 320, last = 0, running = false, visible = true;
-  var y = 0, vy = 0, x = 0, score = 0, best = parseInt(load('best') || '0', 10) || 0, speed = 80, travelled = 0, spawn = 0, things = [], overAt = 0;
-
-  function say(key) { msg.textContent = box.dataset[key]; }
-  function showScore() { scoreEl.textContent = pad(score, 3); bestEl.textContent = pad(best, 3); }
+  var width = 320, last = 0, running = false, visible = true;
+  var y = 0, vy = 0, x = 0, travelled = 0, spawn = 0.5, bugs = [];
 
   function fit() {
     width = Math.max(120, Math.ceil(box.clientWidth / SCALE));
@@ -52,44 +45,15 @@
     x = Math.max(14, Math.floor(width * 0.14));
   }
 
-  function reset(next) {
-    mode = next; y = 0; vy = 0; score = 0; speed = 80; spawn = 0.5; things = [];
-    say(next === 'play' ? 'go' : 'demo');
-    showScore();
-  }
-
-  function jump() { if (y === 0) vy = JUMP; }
-
-  function hit(a, b) {
-    return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
-  }
-
   function step(dt) {
-    travelled += speed * dt;
-    speed = Math.min(165, speed + dt * 2.2);
+    travelled += SPEED * dt;
     vy += GRAVITY * dt;
     y = Math.min(0, y + vy * dt);
     if (y === 0) vy = 0;
-
     spawn -= dt;
-    if (spawn <= 0) {
-      if (Math.random() < 0.62) things.push({ kind: 'bug', x: width + 4, y: GROUND - 8, w: 10, h: 8 });
-      else things.push({ kind: 'coin', x: width + 4, y: GROUND - (Math.random() < 0.5 ? 14 : 34), w: 10, h: 10 });
-      spawn = 0.55 + Math.random() * 0.75;
-    }
-    var me = { x: x + 2, y: GROUND - 14 + y + 1, w: 8, h: 12 };
-    things = things.filter(function (t) {
-      t.x -= speed * dt;
-      if (t.x < -12) return false;
-      if (mode === 'demo' && t.kind === 'bug' && y === 0 && t.x - x < speed * 0.2 && t.x > x) jump();
-      if (!hit(me, t)) return true;
-      if (t.kind === 'coin') {
-        if (mode === 'play') { score += 1; if (score > best) { best = score; save('best', String(best)); } showScore(); }
-        return false;
-      }
-      if (mode === 'play') { mode = 'over'; overAt = performance.now(); say('over'); }
-      return mode !== 'demo';
-    });
+    if (spawn <= 0) { bugs.push(width + 4); spawn = 1 + Math.random() * 1.5; }
+    bugs = bugs.map(function (b) { return b - SPEED * dt; }).filter(function (b) { return b > -12; });
+    if (y === 0 && bugs.some(function (b) { return b > x && b - x < SPEED * 0.3; })) vy = JUMP;
   }
 
   function draw() {
@@ -115,17 +79,15 @@
     var off2 = Math.floor(travelled) % 28;
     for (var gx2 = -off2; gx2 < width; gx2 += 28) ctx.fillRect(gx2, GROUND + 8, 2, 2);
 
-    things.forEach(function (t) { ctx.drawImage(art[t.kind], Math.round(t.x), Math.round(t.y)); });
+    bugs.forEach(function (b) { ctx.drawImage(art.bug, Math.round(b), GROUND - 8); });
     var frame = y < 0 ? art.hero_j : (Math.floor(travelled / 7) % 2 ? art.hero_a : art.hero_b);
     ctx.drawImage(frame, x, Math.round(GROUND - 14 + y));
   }
 
   function tick(now) {
     if (!running) return;
-    var dt = Math.min(0.05, (now - last) / 1000);
+    step(Math.min(0.05, (now - last) / 1000));
     last = now;
-    if (mode !== 'over') step(dt);
-    else if (now - overAt > 7000) reset('demo');
     draw();
     requestAnimationFrame(tick);
   }
@@ -136,26 +98,9 @@
     if (on) { last = performance.now(); requestAnimationFrame(tick); }
   }
 
-  function wanted() { return visible && !document.hidden && (!reduce || mode !== 'demo'); }
+  function wanted() { return visible && !document.hidden && !reduce; }
 
-  function press() {
-    if (mode === 'demo') { reset('play'); run(wanted()); jump(); }
-    else if (mode === 'play') jump();
-    else if (performance.now() - overAt > 350) { reset('play'); jump(); }
-  }
-
-  // A swipe that scrolls the page over the level must not start a game, so the start waits for a click
-  box.addEventListener('pointerdown', function () { if (mode === 'play') jump(); });
-  box.addEventListener('click', function () { if (mode !== 'play') press(); });
-  box.addEventListener('keydown', function (e) {
-    if (e.code === 'Space' || e.code === 'Enter' || e.code === 'ArrowUp') { e.preventDefault(); press(); }
-  });
-  document.addEventListener('keydown', function (e) {
-    if (mode !== 'play' || e.target === box) return;
-    if ((e.code === 'Space' || e.code === 'ArrowUp') && !/^(INPUT|BUTTON|A|SUMMARY|TEXTAREA|SELECT)$/.test(e.target.tagName)) { e.preventDefault(); jump(); }
-  });
-
-  fit(); showScore(); draw();
+  fit(); draw();
   addEventListener('resize', function () { fit(); draw(); });
   new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; run(wanted()); }).observe(box);
   document.addEventListener('visibilitychange', function () { run(wanted()); });
@@ -211,28 +156,6 @@
   });
   home();
   addEventListener('resize', home);
-
-  // ---- the toy coin: a sound and a counter, and no money anywhere near it
-  var coin = document.getElementById('coin'), credit = document.getElementById('credit'), coins = 0, audio = null;
-  function blip() {
-    try {
-      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
-      [[880, 0], [1175, 0.08]].forEach(function (n) {
-        var o = audio.createOscillator(), g = audio.createGain(), at = audio.currentTime + n[1];
-        o.type = 'square'; o.frequency.value = n[0];
-        g.gain.setValueAtTime(0.05, at); g.gain.exponentialRampToValueAtTime(0.001, at + 0.22);
-        o.connect(g); g.connect(audio.destination); o.start(at); o.stop(at + 0.22);
-      });
-    } catch (e) {}
-  }
-  coin.addEventListener('click', function () {
-    if (coin.classList.contains('in')) return;
-    coins = Math.min(99, coins + 1);
-    credit.textContent = pad(coins, 2);
-    blip();
-    coin.classList.add('in');
-    setTimeout(function () { coin.classList.remove('in'); }, reduce ? 0 : 500);
-  });
 
   // ---- for those who try the old code
   var code = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'], at = 0;
