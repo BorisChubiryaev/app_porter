@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{{font_link}}">
-<link rel="stylesheet" href="{{root}}style.css">
+<link rel="stylesheet" href="{{root}}style.css?v={{asset_version}}">
 </head>
 <body>
 <a class="skip" href="#main">{{skip}}</a>
@@ -163,12 +163,12 @@
         <div class="phone" id="phone" role="group" aria-label="{{phone_label}}">
           <div class="screen">
             <div class="scene" aria-hidden="true">{{spr_hero_a}}{{spr_bug}}</div>
-            <button type="button" class="pad" data-x="4" data-y="44" aria-label="D-pad"><i></i><i></i></button>
-            <button type="button" class="abxy" data-x="77" data-y="40" aria-label="A B X Y"><b>X</b><b>Y</b><b>A</b><b>B</b></button>
-            <button type="button" class="pill" data-x="4" data-y="9">L</button>
-            <button type="button" class="pill" data-x="85" data-y="9">R</button>
-            <button type="button" class="pill small" data-x="39" data-y="9">−</button>
-            <button type="button" class="pill small" data-x="53" data-y="9">+</button>
+            <button type="button" class="pad" data-x="4" data-y="44" style="left:4%;top:44%" aria-label="D-pad"><i></i><i></i></button>
+            <button type="button" class="abxy" data-x="77" data-y="40" style="left:77%;top:40%" aria-label="A B X Y"><b>X</b><b>Y</b><b>A</b><b>B</b></button>
+            <button type="button" class="pill" data-x="4" data-y="9" style="left:4%;top:9%">L</button>
+            <button type="button" class="pill" data-x="85" data-y="9" style="left:85%;top:9%">R</button>
+            <button type="button" class="pill small" data-x="39" data-y="9" style="left:39%;top:9%">−</button>
+            <button type="button" class="pill small" data-x="53" data-y="9" style="left:53%;top:9%">+</button>
           </div>
         </div>
       </div>
@@ -221,6 +221,6 @@
   </div>
 </footer>
 <script>window.NX_SPRITES = {{sprites_json}};</script>
-<script src="{{root}}site.js" defer></script>
+<script src="{{root}}site.js?v={{asset_version}}" defer></script>
 </body>
 </html>
