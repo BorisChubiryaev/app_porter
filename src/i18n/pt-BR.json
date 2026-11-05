@@ -105,5 +105,10 @@
  "shot_build": "Enquanto trabalha: etapas claras, o tempo restante e como cancelar.",
  "shot_ready_alt": "A janela do app: um jogo, as chaves, Mac escolhido como lugar de jogar e um botão de compilar",
  "shot_build_alt": "A janela do app durante uma compilação: etapa 3 de 7 com barra de progresso e lista de etapas concluídas",
- "shot_note": "Janelas reais do app, que fala inglês e russo. O nome do jogo, os tamanhos e os tempos são um exemplo."
+ "shot_note": "Janelas reais do app, que fala inglês e russo. O nome do jogo, os tamanhos e os tempos são um exemplo.",
+ "consent_label": "Estatísticas",
+ "consent_text": "Este site usa o Yandex Metrica para saber quantas pessoas o visitam e o que interessa a elas. Ele usa cookies. Permitir?",
+ "consent_yes": "Permitir",
+ "consent_no": "Não, obrigado",
+ "consent_settings": "Configurações de cookies"
 }

@@ -105,5 +105,10 @@
  "shot_build": "Pendant le travail : des étapes claires, le temps restant et un moyen d’annuler.",
  "shot_ready_alt": "La fenêtre de l’app : un jeu, les clés, Mac choisi comme lieu de jeu et un bouton de compilation",
  "shot_build_alt": "La fenêtre de l’app pendant une compilation : étape 3 sur 7, barre de progression et liste des étapes terminées",
- "shot_note": "Vraies fenêtres de l’app, qui parle anglais et russe. Le nom du jeu, les tailles et les durées sont un exemple."
+ "shot_note": "Vraies fenêtres de l’app, qui parle anglais et russe. Le nom du jeu, les tailles et les durées sont un exemple.",
+ "consent_label": "Statistiques",
+ "consent_text": "Ce site utilise Yandex Metrica pour savoir combien de personnes le visitent et ce qui les intéresse. Il dépose des cookies. L’autoriser ?",
+ "consent_yes": "Autoriser",
+ "consent_no": "Non merci",
+ "consent_settings": "Réglages des cookies"
 }

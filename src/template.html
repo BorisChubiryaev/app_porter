@@ -218,9 +218,14 @@
   <div class="wrap">
     <p>{{legal}}</p>
     <p>{{credits}} <a href="{{upstream_url}}" rel="noopener">nxnative</a> · <a href="{{source_url}}" rel="noopener">{{cta_source}}</a></p>
+    <p class="consent-again" hidden><button type="button" class="linkish" id="consent-again">{{consent_settings}}</button></p>
   </div>
 </footer>
-<script>window.NX_SPRITES = {{sprites_json}};</script>
+<div class="consent" id="consent" role="dialog" aria-label="{{consent_label}}" hidden>
+  <p>{{consent_text}}</p>
+  <div class="consent-actions"><button type="button" class="button" id="consent-yes">{{consent_yes}}</button><button type="button" class="button quiet" id="consent-no">{{consent_no}}</button></div>
+</div>
+<script>window.NX_SPRITES = {{sprites_json}}; window.NX_METRIKA = {{metrika_id}};</script>
 <script src="{{root}}site.js?v={{asset_version}}" defer></script>
 </body>
 </html>

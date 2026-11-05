@@ -105,5 +105,10 @@
  "shot_build": "While it works: plain steps, the time left, and a way to cancel.",
  "shot_ready_alt": "The app's window: a game, keys, Mac selected as where to play, and a Build for Mac button",
  "shot_build_alt": "The app's window during a build: step 3 of 7 with a progress bar and a list of finished steps",
- "shot_note": "Real windows of the app. The game name, sizes and times in them are an example."
+ "shot_note": "Real windows of the app. The game name, sizes and times in them are an example.",
+ "consent_label": "Statistics",
+ "consent_text": "This site uses Yandex Metrica to see how many people visit and what they look at. It sets cookies. Allow it?",
+ "consent_yes": "Allow",
+ "consent_no": "No, thanks",
+ "consent_settings": "Cookie settings"
 }

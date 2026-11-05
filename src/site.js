@@ -157,6 +157,34 @@
   home();
   addEventListener('resize', home);
 
+  // ---- Yandex Metrica, loaded only after the visitor allows it; the choice stays in this browser and the footer link changes it
+  var id = window.NX_METRIKA, banner = document.getElementById('consent'), again = document.querySelector('.consent-again'), loaded = false;
+  function metrika() {
+    if (loaded || !id) return;
+    loaded = true;
+    window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
+    window.ym.l = 1 * new Date();
+    var tag = document.createElement('script'); tag.async = true; tag.src = 'https://mc.yandex.ru/metrika/tag.js';
+    document.head.appendChild(tag);
+    window.ym(id, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+  }
+  function choose(yes) {
+    save('consent', yes ? 'yes' : 'no');
+    banner.hidden = true; again.hidden = false;
+    if (yes) metrika();
+  }
+  if (id) {
+    var choice = load('consent');
+    if (choice === 'yes') metrika();
+    if (choice) again.hidden = false; else banner.hidden = false;
+    document.getElementById('consent-yes').addEventListener('click', function () { choose(true); });
+    document.getElementById('consent-no').addEventListener('click', function () { choose(false); });
+    document.getElementById('consent-again').addEventListener('click', function () { banner.hidden = false; });
+    document.querySelectorAll('a.button[href$="Slotless.zip"]').forEach(function (a) {
+      a.addEventListener('click', function () { if (loaded) window.ym(id, 'reachGoal', 'download'); });
+    });
+  }
+
   // ---- for those who try the old code
   var code = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'], at = 0;
   addEventListener('keydown', function (e) {

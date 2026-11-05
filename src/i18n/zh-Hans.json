@@ -105,5 +105,10 @@
  "shot_build": "运行时显示清楚的步骤、剩余时间和取消按钮。",
  "shot_ready_alt": "应用窗口:游戏、密钥、选择 Mac 作为游玩设备,以及构建按钮",
  "shot_build_alt": "构建中的应用窗口:第 3 步(共 7 步)、进度条和已完成步骤列表",
- "shot_note": "这是应用的真实窗口,应用支持英语和俄语。其中的游戏名称、大小和时间仅为示例。"
+ "shot_note": "这是应用的真实窗口,应用支持英语和俄语。其中的游戏名称、大小和时间仅为示例。",
+ "consent_label": "统计",
+ "consent_text": "本网站使用 Yandex Metrica 了解访问人数和大家感兴趣的内容。它会使用 Cookie。是否允许?",
+ "consent_yes": "允许",
+ "consent_no": "不用了",
+ "consent_settings": "Cookie 设置"
 }
