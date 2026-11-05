@@ -129,7 +129,7 @@ def load():
 
 def check(texts, template):
     keys = set(re.findall(r'\{\{(\w+)\}\}', template))
-    computed = {'asset_version', 'lang', 'root', 'alternates', 'language_links', 'download_button', 'donate_buttons', 'source_url', 'upstream_url', 'games_url', 'font_link', 'sprites_json', 'shot_lang', 'seo', 'og_locale'}
+    computed = {'metrika_id', 'asset_version', 'lang', 'root', 'alternates', 'language_links', 'download_button', 'donate_buttons', 'source_url', 'upstream_url', 'games_url', 'font_link', 'sprites_json', 'shot_lang', 'seo', 'og_locale'}
     computed |= {k for k in keys if k.startswith('spr_')}
     errors = []
     for lang, t in texts.items():
@@ -158,7 +158,7 @@ def page(lang, config, texts, template, sprites):
     # in the address of the script and the style: a page never meets a cached copy of another version's (they keep an hour), whose script would stop on this page
     version = hashlib.sha256(b''.join((SRC / f).read_bytes() for f in ('style.css', 'site.js'))).hexdigest()[:10]
     values = {k: e(v) for k, v in t.items()}
-    values.update(asset_version=version, lang=lang, root=root, alternates=alternates, language_links=links, download_button=download, donate_buttons=donate,
+    values.update(metrika_id=json.dumps(int(config['metrika']) if config.get('metrika') else None), asset_version=version, lang=lang, root=root, alternates=alternates, language_links=links, download_button=download, donate_buttons=donate,
                   source_url=e(config['source_url']), upstream_url=e(config['upstream_url']), games_url=e(config['games_url']),
                   font_link=e(f"https://fonts.googleapis.com/css2?{FONTS}{LANG_FONTS.get(lang, '')}&display=swap"),
                   sprites_json=json.dumps(sprites, separators=(',', ':')),

@@ -105,5 +105,10 @@
  "shot_build": "Während sie arbeitet: klare Schritte, die Restzeit und eine Möglichkeit zum Abbrechen.",
  "shot_ready_alt": "Das App-Fenster: ein Spiel, Schlüssel, Mac als Spielort gewählt und eine Schaltfläche zum Erstellen",
  "shot_build_alt": "Das App-Fenster während des Erstellens: Schritt 3 von 7 mit Fortschrittsbalken und einer Liste fertiger Schritte",
- "shot_note": "Echte Fenster der App, die Englisch und Russisch spricht. Spielname, Größen und Zeiten sind ein Beispiel."
+ "shot_note": "Echte Fenster der App, die Englisch und Russisch spricht. Spielname, Größen und Zeiten sind ein Beispiel.",
+ "consent_label": "Statistik",
+ "consent_text": "Diese Seite nutzt Yandex Metrica, um zu sehen, wie viele Menschen sie besuchen und was sie interessiert. Dabei werden Cookies gesetzt. Erlauben?",
+ "consent_yes": "Erlauben",
+ "consent_no": "Nein, danke",
+ "consent_settings": "Cookie-Einstellungen"
 }
