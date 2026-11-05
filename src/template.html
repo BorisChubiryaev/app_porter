@@ -23,14 +23,13 @@
 
 <header class="hud">
   <a class="brand" href="./">{{spr_hero_a}}<span>{{app_name}}</span></a>
-  <p class="free"><span class="blink" aria-hidden="true">●</span> {{hud_free}}</p>
   <nav aria-label="{{nav_label}}">
     <a href="#how">{{nav_how}}</a>
     <a href="#need">{{nav_need}}</a>
     <a href="#faq">{{nav_faq}}</a>
     <a href="#support">{{nav_support}}</a>
   </nav>
-  <p class="credit">{{hud_coins}} <b id="credit">00</b></p>
+  {{download_button}}
   <details class="lang">
     <summary aria-label="{{lang_label}}">{{lang_name}}</summary>
     <ul>{{language_links}}</ul>
@@ -53,13 +52,7 @@
         </div>
       </div>
     </div>
-    <div id="game" class="game" role="button" tabindex="0" aria-label="{{game_label}}" data-demo="{{game_demo}}" data-go="{{game_go}}" data-over="{{game_over}}">
-      <canvas width="320" height="65"></canvas>
-      <div class="game-hud" aria-hidden="true">
-        <span id="game-msg">{{game_demo}}</span>
-        <span>{{game_score}} <b id="game-score">000</b> · {{game_best}} <b id="game-best">000</b></span>
-      </div>
-    </div>
+    <div id="scene" class="scene-strip" aria-hidden="true"><canvas width="320" height="65"></canvas></div>
   </section>
 
   <div class="ticker" aria-label="{{facts_label}}">
@@ -169,7 +162,7 @@
         </div>
         <div class="phone" id="phone" role="group" aria-label="{{phone_label}}">
           <div class="screen">
-            <div class="scene" aria-hidden="true">{{spr_hero_a}}{{spr_bug}}{{spr_coin}}</div>
+            <div class="scene" aria-hidden="true">{{spr_hero_a}}{{spr_bug}}</div>
             <button type="button" class="pad" data-x="4" data-y="44" aria-label="D-pad"><i></i><i></i></button>
             <button type="button" class="abxy" data-x="77" data-y="40" aria-label="A B X Y"><b>X</b><b>Y</b><b>A</b><b>B</b></button>
             <button type="button" class="pill" data-x="4" data-y="9">L</button>
@@ -205,15 +198,10 @@
   <section id="support" class="band coral">
     <div class="wrap support">
       <div>
-        <p class="tag ink-tag">{{coin_tag}}</p>
+        <p class="tag ink-tag">{{support_tag}}</p>
         <h2>{{support_title}}</h2>
         <p class="lede">{{support_sub}}</p>
         <div class="actions">{{donate_buttons}}</div>
-      </div>
-      <div class="machine">
-        <button type="button" id="coin" class="coin" aria-label="{{coin_btn}}">{{spr_coin}}</button>
-        <div class="slot-mouth" aria-hidden="true"><i></i></div>
-        <p>{{coin_hint}}</p>
       </div>
     </div>
   </section>

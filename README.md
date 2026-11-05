@@ -28,7 +28,7 @@ The site lives on Cloudflare Pages at https://slotless.pages.dev: a push to `mai
 
 ## Changing the text
 
-Texts are in `src/i18n/<language>.json`, the page is `src/template.html`, its look `src/style.css`, its toys (the level in the hero, the practice screen, the coin) `src/site.js`, and all pixel art, also the favicon, `src/sprites.json`. `build.py` draws the picture for shared links, `og.png`. A new language takes a JSON file and an entry in `LANGS` in `build.py`.
+Texts are in `src/i18n/<language>.json`, the page is `src/template.html`, its look `src/style.css`, its toys (the scene under the hero, the practice screen) `src/site.js`, and all pixel art, also the favicon, `src/sprites.json`. `build.py` draws the picture for shared links, `og.png`. A new language takes a JSON file and an entry in `LANGS` in `build.py`.
 
 ## Rules for the text
 
