@@ -10,6 +10,7 @@ Only config.json needs editing to go live:
   verify        the codes that search engines' webmaster tools give (google, yandex, bing); an empty one adds nothing
   indexnow_key  public by design: the file that lets indexnow.py tell Bing and Yandex about the pages
 """
+import hashlib
 import html
 import json
 import re
@@ -128,7 +129,7 @@ def load():
 
 def check(texts, template):
     keys = set(re.findall(r'\{\{(\w+)\}\}', template))
-    computed = {'lang', 'root', 'alternates', 'language_links', 'download_button', 'donate_buttons', 'source_url', 'upstream_url', 'games_url', 'font_link', 'sprites_json', 'shot_lang', 'seo', 'og_locale'}
+    computed = {'asset_version', 'lang', 'root', 'alternates', 'language_links', 'download_button', 'donate_buttons', 'source_url', 'upstream_url', 'games_url', 'font_link', 'sprites_json', 'shot_lang', 'seo', 'og_locale'}
     computed |= {k for k in keys if k.startswith('spr_')}
     errors = []
     for lang, t in texts.items():
@@ -154,8 +155,10 @@ def page(lang, config, texts, template, sprites):
                 else f'<span class="button soon" aria-disabled="true">{e(t["cta_soon"])}</span>')
     donate = (''.join(f'<a class="button" href="{e(d["url"])}" rel="noopener">{e(d["label"])}</a>' for d in config['donate'])
               or f'<span class="button soon">{e(t["donate_soon"])}</span>')
+    # in the address of the script and the style: a page never meets a cached copy of another version's (they keep an hour), whose script would stop on this page
+    version = hashlib.sha256(b''.join((SRC / f).read_bytes() for f in ('style.css', 'site.js'))).hexdigest()[:10]
     values = {k: e(v) for k, v in t.items()}
-    values.update(lang=lang, root=root, alternates=alternates, language_links=links, download_button=download, donate_buttons=donate,
+    values.update(asset_version=version, lang=lang, root=root, alternates=alternates, language_links=links, download_button=download, donate_buttons=donate,
                   source_url=e(config['source_url']), upstream_url=e(config['upstream_url']), games_url=e(config['games_url']),
                   font_link=e(f"https://fonts.googleapis.com/css2?{FONTS}{LANG_FONTS.get(lang, '')}&display=swap"),
                   sprites_json=json.dumps(sprites, separators=(',', ':')),
