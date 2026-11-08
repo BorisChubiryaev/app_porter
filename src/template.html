@@ -24,6 +24,7 @@
 <header class="hud">
   <a class="brand" href="./">{{spr_hero_a}}<span>{{app_name}}</span></a>
   <nav aria-label="{{nav_label}}">
+    <a href="#switch2">Switch 2</a>
     <a href="#how">{{nav_how}}</a>
     <a href="#need">{{nav_need}}</a>
     <a href="#faq">{{nav_faq}}</a>
@@ -48,6 +49,7 @@
             {{download_button}}
             <a class="button quiet" href="{{source_url}}" rel="noopener">{{cta_source}}</a>
           </div>
+          <p class="note"><a class="sw2-link" href="#switch2">{{hero_new}}</a></p>
           <p class="note">{{hero_note}}</p>
         </div>
       </div>
@@ -63,6 +65,34 @@
       <p aria-hidden="true">{{tick1}} {{spr_star}} {{tick2}} {{spr_star}} {{tick3}} {{spr_star}} {{tick4}} {{spr_star}}</p>
     </div>
   </div>
+
+  <section id="switch2" class="band sw2">
+    <div class="wrap">
+      <p class="tag">{{sw2_tag}}</p>
+      <h2>{{sw2_title}}</h2>
+      <p class="lede">{{sw2_lede}}</p>
+      <ol class="sw2-stats">
+        <li><strong>11</strong><span>{{sw2_s1}}</span></li>
+        <li><strong>{{sw2_s2big}}</strong><span>{{sw2_s2}}</span></li>
+        <li><strong>{{sw2_s3big}}</strong><span>{{sw2_s3}}</span></li>
+      </ol>
+      <h3>{{sw2_games}}</h3>
+      <ul class="sw2-games">
+        <li>Mario Kart World</li>
+        <li>Donkey Kong Bananza</li>
+        <li>The Legend of Zelda: Ocarina of Time</li>
+        <li>Hyrule Warriors: Age of Imprisonment</li>
+        <li>Kirby Air Riders</li>
+        <li>Mario Tennis Fever</li>
+        <li>Star Fox</li>
+        <li>Splatoon Raiders</li>
+        <li>Pokémon Pokopia</li>
+        <li>Fire Emblem Fortune's Weave</li>
+        <li>Yoshi and the Mysterious Book</li>
+      </ul>
+      <p class="sw2-note">{{sw2_note}} <a href="{{games_url}}" rel="noopener">{{a6_link}}</a></p>
+    </div>
+  </section>
 
   <section class="band ink">
     <div class="wrap">
@@ -190,6 +220,7 @@
         <details><summary>{{q4}}</summary><p>{{a4}}</p></details>
         <details><summary>{{q5}}</summary><p>{{a5}}</p></details>
         <details><summary>{{q6}}</summary><p>{{a6}} <a href="{{games_url}}" rel="noopener">{{a6_link}}</a></p></details>
+        <details><summary>{{q8}}</summary><p>{{a8}}</p></details>
         <details><summary>{{q7}}</summary><p>{{a7}}</p></details>
       </div>
     </div>
